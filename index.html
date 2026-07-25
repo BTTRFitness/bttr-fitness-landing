@@ -24,10 +24,10 @@
 <header class="hero" id="top">
   <div class="container hero-grid">
     <div>
-      <div class="eyebrow"><span class="dot"></span> Coming soon</div>
-      <h1 class="headline">Get BTTR every day.</h1>
-      <p class="tagline">One app for training, nutrition, runs, and progress — built to make you better, every day. Join the waitlist and be first to get in.</p>
-      <div class="feature-pills">
+      <div class="eyebrow hero-in" style="--d:0s"><span class="dot"></span> Coming soon</div>
+      <h1 class="headline hero-in" style="--d:0.08s">Get BTTR every day.</h1>
+      <p class="tagline hero-in" style="--d:0.16s">One app for training, nutrition, runs, and progress — built to make you better, every day. Join the waitlist and be first to get in.</p>
+      <div class="feature-pills hero-in" style="--d:0.24s">
         <span class="pill">Workout Tracking</span>
         <span class="pill">Nutrition</span>
         <span class="pill">Run Tracking</span>
@@ -35,15 +35,23 @@
       </div>
     </div>
 
-    <div class="phone-stage">
+    <div class="phone-stage hero-in" style="--d:0.1s">
       <div class="phone-glow"></div>
-      <div class="phone">
-        <div class="phone-screen">
-          <img class="phone-shot active" src="assets/screenshots/main.png" alt="BTTR FIT home screen" data-caption="Home">
-          <img class="phone-shot" src="assets/screenshots/train.png" alt="BTTR FIT train screen" data-caption="Train">
-          <img class="phone-shot" src="assets/screenshots/stats.png" alt="BTTR FIT workout log screen" data-caption="Stats">
-          <img class="phone-shot" src="assets/screenshots/fuel.png" alt="BTTR FIT nutrition screen" data-caption="Nutrition">
-          <img class="phone-shot" src="assets/screenshots/profile.png" alt="BTTR FIT profile screen" data-caption="Profile">
+      <div class="phone-tilt" id="phone-tilt">
+        <div class="phone">
+          <div class="phone-btn mute"></div>
+          <div class="phone-btn vol-up"></div>
+          <div class="phone-btn vol-down"></div>
+          <div class="phone-btn power"></div>
+          <div class="phone-screen">
+            <div class="dynamic-island"></div>
+            <img class="phone-shot active" src="assets/screenshots/main.png" alt="BTTR FIT home screen" data-caption="Home">
+            <img class="phone-shot" src="assets/screenshots/train.png" alt="BTTR FIT train screen" data-caption="Train">
+            <img class="phone-shot" src="assets/screenshots/stats.png" alt="BTTR FIT workout log screen" data-caption="Stats">
+            <img class="phone-shot" src="assets/screenshots/fuel.png" alt="BTTR FIT nutrition screen" data-caption="Nutrition">
+            <img class="phone-shot" src="assets/screenshots/profile.png" alt="BTTR FIT profile screen" data-caption="Profile">
+            <div class="phone-sheen"></div>
+          </div>
         </div>
       </div>
       <div class="phone-caption" id="phone-caption">Home</div>
@@ -52,7 +60,7 @@
 </header>
 
 <section class="container" id="waitlist" style="padding-bottom: 60px;">
-  <div class="waitlist" style="max-width: 480px; margin: 0 auto;">
+  <div class="waitlist reveal" style="max-width: 480px; margin: 0 auto;">
     <div id="waitlist-form-wrap">
       <h2>Join the waitlist</h2>
       <p class="sub">Be the first to know when BTTR FIT launches.</p>
@@ -89,25 +97,25 @@
 
 <section class="features" id="features">
   <div class="container">
-    <h2>Everything, in one place</h2>
-    <p>No more juggling five different apps for your training.</p>
+    <h2 class="reveal">Everything, in one place</h2>
+    <p class="reveal">No more juggling five different apps for your training.</p>
     <div class="feature-grid">
-      <div class="feature-card">
+      <div class="feature-card reveal">
         <div class="icon">🏋️</div>
         <h3>Workout Tracking</h3>
         <p>Log sets, reps, and weight. See your history and PRs at a glance.</p>
       </div>
-      <div class="feature-card">
+      <div class="feature-card reveal">
         <div class="icon">🍽️</div>
         <h3>Nutrition</h3>
         <p>Track calories and macros with a barcode scanner built in.</p>
       </div>
-      <div class="feature-card">
+      <div class="feature-card reveal">
         <div class="icon">🏃</div>
         <h3>Run Tracking</h3>
         <p>GPS routes, pace, and distance — synced with Apple Health.</p>
       </div>
-      <div class="feature-card">
+      <div class="feature-card reveal">
         <div class="icon">👥</div>
         <h3>Community</h3>
         <p>Share workouts, follow friends, and celebrate progress together.</p>
@@ -118,9 +126,9 @@
 
 <section class="bottom-cta">
   <div class="container">
-    <h2>Get BTTR, together.</h2>
-    <p>Join the waitlist — no spam, just one email when we launch.</p>
-    <a class="btn" href="#waitlist">Join the Waitlist</a>
+    <h2 class="reveal">Get BTTR, together.</h2>
+    <p class="reveal">Join the waitlist — no spam, just one email when we launch.</p>
+    <a class="btn reveal" href="#waitlist">Join the Waitlist</a>
   </div>
 </section>
 
@@ -145,6 +153,7 @@
     document.getElementById('success-msg').style.display = 'block';
   });
 
+  // Screenshot carousel
   (function () {
     var shots = document.querySelectorAll('.phone-shot');
     var caption = document.getElementById('phone-caption');
@@ -156,6 +165,48 @@
       shots[i].classList.add('active');
       caption.textContent = shots[i].dataset.caption;
     }, 2800);
+  })();
+
+  // Mouse-reactive 3D phone tilt (desktop only; ignored on touch)
+  (function () {
+    var stage = document.querySelector('.phone-stage');
+    var tilt = document.getElementById('phone-tilt');
+    if (!stage || !tilt || matchMedia('(hover: none)').matches) return;
+    stage.addEventListener('mousemove', function (e) {
+      var r = stage.getBoundingClientRect();
+      var px = (e.clientX - r.left) / r.width - 0.5;
+      var py = (e.clientY - r.top) / r.height - 0.5;
+      tilt.style.transform = 'rotateY(' + (px * 18) + 'deg) rotateX(' + (py * -18) + 'deg)';
+    });
+    stage.addEventListener('mouseleave', function () {
+      tilt.style.transform = '';
+    });
+  })();
+
+  // Scroll-triggered reveal animations
+  (function () {
+    var items = document.querySelectorAll('.reveal');
+    if (!items.length) return;
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry, idx) {
+        if (entry.isIntersecting) {
+          var siblingIndex = Array.prototype.indexOf.call(entry.target.parentElement.children, entry.target);
+          entry.target.style.transitionDelay = (Math.min(siblingIndex, 4) * 0.08) + 's';
+          entry.target.classList.add('in-view');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    items.forEach(function (el) { io.observe(el); });
+  })();
+
+  // Nav shadow on scroll
+  (function () {
+    var nav = document.querySelector('.nav');
+    if (!nav) return;
+    window.addEventListener('scroll', function () {
+      nav.classList.toggle('scrolled', window.scrollY > 8);
+    }, { passive: true });
   })();
 </script>
 

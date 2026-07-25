@@ -39,12 +39,14 @@
       <div class="phone-glow"></div>
       <div class="phone">
         <div class="phone-screen">
-          <div class="phone-placeholder">
-            <div class="icon">📱</div>
-            <p>App screenshot<br>coming soon</p>
-          </div>
+          <img class="phone-shot active" src="assets/screenshots/main.png" alt="BTTR FIT home screen" data-caption="Home">
+          <img class="phone-shot" src="assets/screenshots/train.png" alt="BTTR FIT train screen" data-caption="Train">
+          <img class="phone-shot" src="assets/screenshots/stats.png" alt="BTTR FIT workout log screen" data-caption="Stats">
+          <img class="phone-shot" src="assets/screenshots/fuel.png" alt="BTTR FIT nutrition screen" data-caption="Nutrition">
+          <img class="phone-shot" src="assets/screenshots/profile.png" alt="BTTR FIT profile screen" data-caption="Profile">
         </div>
       </div>
+      <div class="phone-caption" id="phone-caption">Home</div>
     </div>
   </div>
 </header>
@@ -142,6 +144,19 @@
     document.getElementById('waitlist-form-wrap').style.display = 'none';
     document.getElementById('success-msg').style.display = 'block';
   });
+
+  (function () {
+    var shots = document.querySelectorAll('.phone-shot');
+    var caption = document.getElementById('phone-caption');
+    if (!shots.length) return;
+    var i = 0;
+    setInterval(function () {
+      shots[i].classList.remove('active');
+      i = (i + 1) % shots.length;
+      shots[i].classList.add('active');
+      caption.textContent = shots[i].dataset.caption;
+    }, 2800);
+  })();
 </script>
 
 </body>

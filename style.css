@@ -37,31 +37,39 @@ img { max-width: 100%; display: block; }
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 16px 20px;
+  gap: 12px;
+  padding: 14px 20px;
   max-width: 1080px;
   margin: 0 auto;
 }
 .logo {
   font-weight: 900;
-  font-size: 18px;
+  font-size: 17px;
   letter-spacing: -0.02em;
   text-decoration: none;
   color: var(--green-dark);
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 .nav-links {
-  display: flex;
+  display: none;
   gap: 24px;
   font-size: 14px;
   font-weight: 600;
 }
-.nav-links a { text-decoration: none; color: var(--text-sub); }
+.nav-links a { text-decoration: none; color: var(--text-sub); white-space: nowrap; }
 .nav-links a:hover { color: var(--green-dark); }
+@media (min-width: 720px) {
+  .nav-links { display: flex; }
+}
 .nav-cta {
   background: var(--green);
   color: #fff !important;
-  padding: 9px 18px;
+  padding: 9px 16px;
   border-radius: 999px;
   text-decoration: none;
+  white-space: nowrap;
+  flex-shrink: 0;
   font-size: 13px;
   font-weight: 700;
 }

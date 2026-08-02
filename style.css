@@ -248,15 +248,6 @@ h1.headline {
 .phone-tilt {
   transform-style: preserve-3d;
   transition: transform 0.2s ease-out;
-  animation: phoneFloat 4.5s ease-in-out infinite;
-  animation-delay: 1s;
-}
-@keyframes phoneFloat {
-  0%, 100% { translate: 0 0; rotate: -2deg; }
-  50% { translate: 0 -18px; rotate: 2deg; }
-}
-@media (prefers-reduced-motion: reduce) {
-  .phone-tilt { animation: none; }
 }
 .phone {
   position: relative;

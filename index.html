@@ -146,11 +146,30 @@
 </footer>
 
 <script>
-  // TODO: wire this up to Brevo (or whichever waitlist service) once the
-  // account/API key is ready — currently just shows a success state locally
-  // and does not actually store or send the submitted info anywhere.
+  // Submits to a Google Apps Script Web App bound to the "BTTR FIT Waitlist"
+  // Google Sheet, which appends a row per signup. mode: 'no-cors' means we
+  // can't read the response (Apps Script doesn't send CORS headers), so this
+  // fires the request and shows success optimistically rather than waiting
+  // to confirm — acceptable for a low-stakes waitlist form.
+  var WAITLIST_ENDPOINT = 'https://script.google.com/macros/s/AKfycbwJiulC9-AcrTNN9ndL5i56GDPdtlouw3-GQHz1hfKwZpN7p5EOBmAqSIK_HhpVAK7D/exec';
+  var WAITLIST_TOKEN = '06d2058a8aa87d88c642ef6acbf25511';
+
   document.getElementById('waitlist-form').addEventListener('submit', function (e) {
     e.preventDefault();
+    var form = e.target;
+    var body = new URLSearchParams({
+      name: form.name.value,
+      email: form.email.value,
+      state: form.state.value,
+      city: form.city.value,
+      token: WAITLIST_TOKEN
+    });
+    fetch(WAITLIST_ENDPOINT, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: body.toString()
+    }).catch(function () { /* opaque no-cors response either way; ignore network errors */ });
     document.getElementById('waitlist-form-wrap').style.display = 'none';
     document.getElementById('success-msg').style.display = 'block';
   });

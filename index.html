@@ -224,22 +224,6 @@
     }, 2800);
   })();
 
-  // Mouse-reactive 3D phone tilt (desktop only; ignored on touch)
-  (function () {
-    var stage = document.querySelector('.phone-stage');
-    var tilt = document.getElementById('phone-tilt');
-    if (!stage || !tilt || matchMedia('(hover: none)').matches) return;
-    stage.addEventListener('mousemove', function (e) {
-      var r = stage.getBoundingClientRect();
-      var px = (e.clientX - r.left) / r.width - 0.5;
-      var py = (e.clientY - r.top) / r.height - 0.5;
-      tilt.style.transform = 'rotateY(' + (px * 18) + 'deg) rotateX(' + (py * -18) + 'deg)';
-    });
-    stage.addEventListener('mouseleave', function () {
-      tilt.style.transform = '';
-    });
-  })();
-
   // Scroll-triggered reveal animations
   (function () {
     var items = document.querySelectorAll('.reveal');

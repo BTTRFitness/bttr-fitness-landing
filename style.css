@@ -235,7 +235,6 @@ h1.headline {
   flex-direction: column;
   align-items: center;
   padding: 20px 0;
-  perspective: 1200px;
 }
 .phone-glow {
   position: absolute;
@@ -244,10 +243,6 @@ h1.headline {
   background: radial-gradient(circle, rgba(61,97,71,0.18), transparent 70%);
   filter: blur(10px);
   z-index: 0;
-}
-.phone-tilt {
-  transform-style: preserve-3d;
-  transition: transform 0.2s ease-out;
 }
 .phone {
   position: relative;
